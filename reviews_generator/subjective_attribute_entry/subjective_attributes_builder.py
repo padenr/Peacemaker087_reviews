@@ -1,15 +1,8 @@
 ## What is needed for video game reviews ##
 
-class VideoGameReviewsMetadataBuilder:
+class SubjectiveAttributesBuilder:
 
     def __init__(self, video_game_name):
-        pass
-
-    """
-        The group or anthology the game is a part of
-    """
-
-    def add_series(self, series_name):
         pass
 
     """
@@ -26,7 +19,7 @@ class VideoGameReviewsMetadataBuilder:
             - Traditional Narrative (1-5 stars)
     """
 
-    def add_narrative_rating(self, narrative_type: str, stars=None: int) -> None: 
+    def add_narrative_score(self, narrative_type: str, stars=None: int) -> None: 
         pass 
 
     """ 
@@ -34,7 +27,7 @@ class VideoGameReviewsMetadataBuilder:
             - 
     """ 
 
-    def add_gameplay_rating(self):
+    def add_gameplay_score(self):
         pass
 
     """
@@ -47,7 +40,7 @@ class VideoGameReviewsMetadataBuilder:
             - When the game came out (1-5 stars) 
     """
 
-    def add_graphics_rating(self, graphics_type: str, artistic_rating=None: str, stars=None: int) -> None:
+    def add_graphics_score(self, graphics_type: str, artistic_rating=None: str, stars=None: int) -> None:
         pass
 
     """
