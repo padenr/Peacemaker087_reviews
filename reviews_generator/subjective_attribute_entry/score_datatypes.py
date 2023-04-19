@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from enum import Enum
-from abc import ABC
 
 
 @dataclass
