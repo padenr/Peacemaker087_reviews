@@ -1,7 +1,7 @@
 import requests
 
-from reviews_generator.data_scraping.data_scraper import Scraper, WikipediaVideoGameEntryScraper
-from reviews_generator.data_scraping.data_scraper import MetacriticScraper, MetacriticConsoleEnum
+from reviews_metadata_generator.data_scraping.data_scraper import Scraper, WikipediaVideoGameEntryScraper
+from reviews_metadata_generator.data_scraping.data_scraper import MetacriticScraper, MetacriticConsoleEnum
 
 ###############################################
 #                Scraper Tests                #
@@ -36,6 +36,11 @@ class TestWikipediaVideoGameEntryScraper:
     def setup_class(cls):
         cls.scraper = WikipediaVideoGameEntryScraper("The_Elder_Scrolls_V:_Skyrim")
 
+    def test_get_wiki_entry_image_url(self):
+        actual_image_url = self.scraper.get_wiki_entry_image_url()
+        expected_image_url = "https://upload.wikimedia.org/wikipedia/en/thumb/1/15/The_Elder_Scrolls_V_Skyrim_cover.png/220px-The_Elder_Scrolls_V_Skyrim_cover.png"
+        assert actual_image_url == expected_image_url
+
     def test_get_value_from_header(self):
         actual_developers = self.scraper.get_value_from_header('developers', '[a]')
         expected_developers = ["Bethesda Game Studios"]
@@ -65,6 +70,5 @@ class TestMetacriticScraper:
 
     def test_get_rating(self):
         actual_rating = self.scraper.get_rating()
-        print(actual_rating)
         expected_rating = 'M'
         assert actual_rating == expected_rating

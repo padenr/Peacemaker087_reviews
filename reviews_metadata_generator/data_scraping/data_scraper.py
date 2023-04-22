@@ -1,6 +1,7 @@
 import requests
 
 from requests import Response
+from PIL import Image
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
@@ -15,6 +16,7 @@ class MetacriticConsoleEnum(Enum):
     PS3 = "playstation-3"
     PC = "pc"
     PS4 = "playstation-4"
+    SWITCH = "switch"
     
 
 class Scraper(ABC): 
@@ -59,7 +61,17 @@ class WikipediaVideoGameEntryScraper:
         URL = f"{self.ROOT_URL}{wiki_page_title}"
         self.__scraper = Scraper(requests.get(URL))
 
-    def get_value_from_header(self, header_value: str, sub_strings_to_strip: list) -> list:
+    def get_wiki_entry_title(self) -> str:
+        return self.__scraper.find_element('h1', {'id': 'firstHeading'}).text
+
+    def get_wiki_entry_image_url(self):
+        image_element = self.__scraper.find_element_with_offset('td', {'class': 'infobox-image'}, 2)
+        if image_element == None:
+            return None
+        image_url = "https:" + image_element.get('src')
+        return image_url
+
+    def get_value_from_header(self, header_value: str, sub_strings_to_strip: list = []) -> list:
         header_values = []
         wikipedia_value = self.ELEMENT_SIMPLIFIER_MAP[header_value]
         header_element = self.__scraper.find_table_element_by_row_header('table', {'class': 'infobox ib-video-game hproduct'}, wikipedia_value)

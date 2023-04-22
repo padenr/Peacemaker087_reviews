@@ -1,11 +1,11 @@
-from subjective_attribute_entry.score_datatypes import ScoringAttributes, NarrativeScoreEnum, GraphicalScoreEnum
-from subjective_attribute_entry.play_datatypes import PlayAttributes, PreferredCoOpEnum
+from reviews_metadata_generator.subjective_attribute_entry.score_data_types import SubjectiveScoringAttributes, NarrativeScoreEnum, GraphicalScoreEnum
+from reviews_metadata_generator.subjective_attribute_entry.play_data_types import PlayAttributes, PreferredCoOpEnum
 
 
 class SubjectiveAttributesBuilder:
 
-    def __init__(self, video_game_name):
-        self._scoring_attributes = ScoringAttributes()
+    def __init__(self):
+        self._scoring_attributes = SubjectiveScoringAttributes()
         self._play_attributes = PlayAttributes()
     """
         Total Score (1.x-10; x=0-9)
@@ -43,9 +43,9 @@ class SubjectiveAttributesBuilder:
             - Considered poor at the time of release
     """
 
-    def add_graphics_score(self, graphics_type: GraphicalScoreEnum, graphics_score: float) -> None:
+    def add_graphical_score(self, graphical_type: GraphicalScoreEnum, graphics_score: float) -> None:
         self._scoring_attributes.gameplay_score = graphics_score
-        self._scoring_attributes.graphics_type = graphics_type
+        self._scoring_attributes.graphical_type = graphical_type
 
     """
         The game is better played with friends if true.
@@ -58,6 +58,9 @@ class SubjectiveAttributesBuilder:
 
     def add_estimated_play_date(self, estimated_play_date: str) -> None:
         self._play_attributes.estimated_play_date = estimated_play_date
+
+    def add_platform(self, platform: str) -> None:
+        self._play_attributes.platform = platform
 
     def add_completed(self, is_completed: bool) -> None:
         self._play_attributes.completed = is_completed
@@ -73,6 +76,12 @@ class SubjectiveAttributesBuilder:
 
     def add_recommend_the_ost(self, recommend_the_ost: bool) -> None:
         self._play_attributes.recommend_the_ost = recommend_the_ost
+
+    def get_play_attributes(self):
+        return self._play_attributes
+    
+    def get_subjective_scoring_attributes(self):
+        return self._scoring_attributes
 
 
 
